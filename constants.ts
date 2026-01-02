@@ -28,16 +28,6 @@ export const PROJECTS: Project[] = [
     description: "Plateforme interactive de cartographie topographique et thématique pour l'aménagement du territoire.",
     tech: ["QGIS", "Leaflet", "Web GIS"],
     link: "https://jilitelmostafa.github.io/topoma/topoma"
-  },
-  {
-    title: "SIG-RGPH 2024",
-    description: "Système d'information géographique dédié au découpage des districts et repères géographiques pour le recensement national.",
-    tech: ["ArcGIS", "QGIS", "SGBD Spatiale"]
-  },
-  {
-    title: "Inmaa Map",
-    description: "Application de suivi pour l'éducation et la vie associative, permettant de visualiser l'impact social par région.",
-    tech: ["Google Maps API", "CartoDB"]
   }
 ];
 
