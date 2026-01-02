@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { PERSONAL_INFO } from '../constants';
-import { MapPin, Mail, Phone, ExternalLink, Facebook, Instagram, Twitter, Linkedin, MessageCircle, FileDown, Send } from 'lucide-react';
+import { MapPin, Mail, Phone, ExternalLink, Facebook, Instagram, Twitter, Linkedin, MessageCircle, FileDown, Send, Share2, Copy, Check } from 'lucide-react';
 
 const TikTokIcon = ({ size = 20 }: { size?: number }) => (
   <svg 
@@ -19,6 +19,44 @@ const TikTokIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const Hero: React.FC = () => {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const shareUrl = typeof window !== 'undefined' ? encodeURIComponent(window.location.href) : '';
+  const shareTitle = encodeURIComponent(`Portfolio de ${PERSONAL_INFO.name} - Expert en SIG`);
+
+  const shareLinks = [
+    { 
+      name: 'WhatsApp', 
+      icon: MessageCircle, 
+      href: `https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`,
+      color: 'hover:text-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-900/20' 
+    },
+    { 
+      name: 'Facebook', 
+      icon: Facebook, 
+      href: `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`,
+      color: 'hover:text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20' 
+    },
+    { 
+      name: 'LinkedIn', 
+      icon: Linkedin, 
+      href: `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`,
+      color: 'hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/20' 
+    },
+    { 
+      name: 'X', 
+      icon: Twitter, 
+      href: `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`,
+      color: 'hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800' 
+    },
+  ];
+
   return (
     <section id="about" className="pt-16 pb-20 px-4">
       <div className="max-w-5xl mx-auto flex flex-col items-center text-center">
@@ -55,7 +93,7 @@ const Hero: React.FC = () => {
           {PERSONAL_INFO.name}
         </h1>
 
-        {/* Social Media Icons */}
+        {/* Social Media Icons (Profiles) */}
         <div className="flex items-center justify-center gap-4 mb-8">
           {[
             { href: PERSONAL_INFO.socials.facebook, icon: Facebook, color: 'hover:text-indigo-600', title: 'Facebook' },
@@ -83,7 +121,8 @@ const Hero: React.FC = () => {
           {PERSONAL_INFO.objective}
         </p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+        {/* Primary CTAs */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
           <a href={PERSONAL_INFO.cvLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-700 hover:shadow-xl transition-all active:scale-95 group">
             <FileDown size={24} className="group-hover:animate-bounce" />
             Télécharger mon CV
@@ -93,7 +132,38 @@ const Hero: React.FC = () => {
             Me Contacter
           </a>
         </div>
+
+        {/* Social Sharing Section */}
+        <div className="flex flex-col items-center gap-3 mb-16 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <div className="flex items-center gap-2 text-slate-400 dark:text-slate-500">
+            <Share2 size={14} />
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Partager ce portfolio</span>
+          </div>
+          <div className="flex items-center gap-2">
+            {shareLinks.map((link, idx) => (
+              <a
+                key={idx}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-xl border border-slate-100 dark:border-slate-800 transition-all ${link.color} text-slate-400`}
+                title={`Partager sur ${link.name}`}
+              >
+                <link.icon size={18} />
+              </a>
+            ))}
+            <button
+              onClick={handleCopyLink}
+              className={`p-2 rounded-xl border border-slate-100 dark:border-slate-800 transition-all text-slate-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 hover:text-indigo-600 flex items-center gap-2`}
+              title="Copier le lien"
+            >
+              {copied ? <Check size={18} className="text-emerald-500" /> : <Copy size={18} />}
+              {copied && <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider pr-1">Copié</span>}
+            </button>
+          </div>
+        </div>
         
+        {/* Info Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
           {[
             { icon: MapPin, label: 'Localisation', value: PERSONAL_INFO.location, color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30' },
