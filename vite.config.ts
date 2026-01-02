@@ -6,6 +6,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
+      base: './', // يضمن أن جميع المسارات تعمل بشكل نسبي
       server: {
         port: 3000,
         host: '0.0.0.0',
@@ -17,7 +18,6 @@ export default defineConfig(({ mode }) => {
       },
       resolve: {
         alias: {
-          // Replaced __dirname with path.resolve('.') for broad environment support
           '@': path.resolve('.'),
         }
       }

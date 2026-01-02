@@ -38,26 +38,20 @@ const App: React.FC = () => {
         {/* Stats Section */}
         <section className="py-12 px-4 max-w-6xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center group transition-transform hover:-translate-y-1">
-              <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">5+</div>
-              <div className="text-slate-500 dark:text-slate-400 text-sm font-medium">Années d'Expérience</div>
-            </div>
-            <div className="text-center group transition-transform hover:-translate-y-1">
-              <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">10+</div>
-              <div className="text-slate-500 dark:text-slate-400 text-sm font-medium">Logiciels SIG</div>
-            </div>
-            <div className="text-center group transition-transform hover:-translate-y-1">
-              <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">100+</div>
-              <div className="text-slate-500 dark:text-slate-400 text-sm font-medium">Cartes Réalisées</div>
-            </div>
-            <div className="text-center group transition-transform hover:-translate-y-1">
-              <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">2024</div>
-              <div className="text-slate-500 dark:text-slate-400 text-sm font-medium">RGPH Mission</div>
-            </div>
+            {[
+              { label: "Années d'Expérience", value: "5+" },
+              { label: "Logiciels SIG", value: "10+" },
+              { label: "Cartes Réalisées", value: "100+" },
+              { label: "RGPH Mission", value: "2024" }
+            ].map((stat, i) => (
+              <div key={i} className="text-center group transition-transform hover:-translate-y-1">
+                <div className="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-1">{stat.value}</div>
+                <div className="text-slate-500 dark:text-slate-400 text-sm font-medium">{stat.label}</div>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* Reordered: Education now appears above Experience */}
         <Education />
         <Experience />
         <Skills />

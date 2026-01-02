@@ -55,31 +55,25 @@ const Hero: React.FC = () => {
           {PERSONAL_INFO.name}
         </h1>
 
-        {/* Social Media Icons - Below Name */}
+        {/* Social Media Icons */}
         <div className="flex items-center justify-center gap-4 mb-8">
-          <a href={PERSONAL_INFO.socials.facebook} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="Facebook">
-            <Facebook size={20} />
-          </a>
-          <a href={PERSONAL_INFO.socials.instagram} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="Instagram">
-            <Instagram size={20} />
-          </a>
-          <a href={PERSONAL_INFO.socials.linkedin} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-blue-600 dark:hover:text-blue-400 border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="LinkedIn">
-            <Linkedin size={20} />
-          </a>
-          <a href={PERSONAL_INFO.socials.twitter} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="Twitter">
-            <Twitter size={20} />
-          </a>
-          <a href={PERSONAL_INFO.socials.tiktok} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-black dark:hover:text-slate-300 border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="TikTok">
-            <TikTokIcon size={20} />
-          </a>
-          <a href={PERSONAL_INFO.socials.whatsapp} target="_blank" rel="noopener noreferrer" className="p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110" title="WhatsApp">
-            <MessageCircle size={20} />
-          </a>
+          {[
+            { href: PERSONAL_INFO.socials.facebook, icon: Facebook, color: 'hover:text-indigo-600', title: 'Facebook' },
+            { href: PERSONAL_INFO.socials.instagram, icon: Instagram, color: 'hover:text-rose-600', title: 'Instagram' },
+            { href: PERSONAL_INFO.socials.linkedin, icon: Linkedin, color: 'hover:text-blue-600', title: 'LinkedIn' },
+            { href: PERSONAL_INFO.socials.twitter, icon: Twitter, color: 'hover:text-slate-900 dark:hover:text-white', title: 'Twitter' },
+            { href: PERSONAL_INFO.socials.tiktok, icon: TikTokIcon, color: 'hover:text-black dark:hover:text-slate-300', title: 'TikTok' },
+            { href: PERSONAL_INFO.socials.whatsapp, icon: MessageCircle, color: 'hover:text-emerald-600', title: 'WhatsApp' }
+          ].map((social, idx) => (
+            <a key={idx} href={social.href} target="_blank" rel="noopener noreferrer" className={`p-2.5 bg-white dark:bg-slate-800 rounded-full text-slate-500 ${social.color} border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:scale-110`} title={social.title}>
+              <social.icon size={20} />
+            </a>
+          ))}
         </div>
         
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {PERSONAL_INFO.titles.map((title, i) => (
-            <span key={i} className="px-5 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-600 dark:text-slate-300 shadow-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+            <span key={i} className="px-5 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-slate-600 dark:text-slate-300 shadow-sm font-medium">
               {title}
             </span>
           ))}
@@ -89,68 +83,38 @@ const Hero: React.FC = () => {
           {PERSONAL_INFO.objective}
         </p>
 
-        {/* Main CTA Section */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a 
-            href={PERSONAL_INFO.cvLink} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-500/30 transition-all active:scale-95 group"
-          >
+          <a href={PERSONAL_INFO.cvLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto flex items-center justify-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-indigo-700 hover:shadow-xl transition-all active:scale-95 group">
             <FileDown size={24} className="group-hover:animate-bounce" />
             Télécharger mon CV
           </a>
-          <a 
-            href="#contact" 
-            className="w-full sm:w-auto flex items-center justify-center gap-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95 shadow-sm"
-          >
+          <a href="#contact" className="w-full sm:w-auto flex items-center justify-center gap-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all active:scale-95">
             <Send size={20} className="text-indigo-600 dark:text-indigo-400" />
             Me Contacter
           </a>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-4xl">
-          <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3 group transition-all hover:shadow-xl hover:-translate-y-1">
-            <div className="bg-indigo-50 dark:bg-indigo-900/30 p-2.5 rounded-xl text-indigo-600 dark:text-indigo-400 group-hover:scale-110 transition-transform">
-              <MapPin size={22} />
+          {[
+            { icon: MapPin, label: 'Localisation', value: PERSONAL_INFO.location, color: 'text-indigo-600 bg-indigo-50 dark:bg-indigo-900/30' },
+            { icon: Mail, label: 'Email', value: PERSONAL_INFO.email, color: 'text-rose-600 bg-rose-50 dark:bg-rose-900/30' },
+            { icon: Phone, label: 'Téléphone', value: PERSONAL_INFO.phone, color: 'text-emerald-600 bg-emerald-50 dark:bg-emerald-900/30' },
+            { icon: ExternalLink, label: 'LinkedIn', value: 'Connecter', color: 'text-blue-600 bg-blue-50 dark:bg-blue-900/30', href: PERSONAL_INFO.linkedin }
+          ].map((item, idx) => (
+            <div key={idx} className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3 group transition-all hover:shadow-xl hover:-translate-y-1">
+              <div className={`${item.color} p-2.5 rounded-xl group-hover:scale-110 transition-transform`}>
+                <item.icon size={22} />
+              </div>
+              <div className="text-left overflow-hidden">
+                <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">{item.label}</p>
+                {item.href ? (
+                   <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold truncate block group-hover:text-indigo-600 transition-colors">{item.value}</a>
+                ) : (
+                  <p className="text-sm font-semibold truncate">{item.value}</p>
+                )}
+              </div>
             </div>
-            <div className="text-left overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Localisation</p>
-              <p className="text-sm font-semibold truncate">{PERSONAL_INFO.location}</p>
-            </div>
-          </div>
-          <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3 group transition-all hover:shadow-xl hover:-translate-y-1">
-            <div className="bg-rose-50 dark:bg-rose-900/30 p-2.5 rounded-xl text-rose-600 dark:text-rose-400 group-hover:scale-110 transition-transform">
-              <Mail size={22} />
-            </div>
-            <div className="text-left overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Email</p>
-              <p className="text-sm font-semibold truncate">{PERSONAL_INFO.email}</p>
-            </div>
-          </div>
-          <div className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3 group transition-all hover:shadow-xl hover:-translate-y-1">
-            <div className="bg-emerald-50 dark:bg-emerald-900/30 p-2.5 rounded-xl text-emerald-600 dark:text-emerald-400 group-hover:scale-110 transition-transform">
-              <Phone size={22} />
-            </div>
-            <div className="text-left overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Téléphone</p>
-              <p className="text-sm font-semibold truncate">{PERSONAL_INFO.phone}</p>
-            </div>
-          </div>
-          <a 
-            href={PERSONAL_INFO.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-4 bg-white dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3 hover:border-indigo-300 dark:hover:border-indigo-700 group transition-all hover:shadow-xl hover:-translate-y-1"
-          >
-            <div className="bg-blue-50 dark:bg-blue-900/30 p-2.5 rounded-xl text-blue-600 dark:text-blue-400 group-hover:scale-110 transition-transform">
-              <ExternalLink size={22} />
-            </div>
-            <div className="text-left overflow-hidden">
-              <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">LinkedIn</p>
-              <p className="text-sm font-semibold group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors truncate">Connecter</p>
-            </div>
-          </a>
+          ))}
         </div>
       </div>
     </section>
