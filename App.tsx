@@ -21,9 +21,9 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // حساب حركة الماوس بنسبة مئوية لتحريك الخلفية
-      const x = (e.clientX / window.innerWidth - 0.5) * 30;
-      const y = (e.clientY / window.innerHeight - 0.5) * 30;
+      // حساب حركة الماوس بنسبة مئوية لتحريك الخلفية بشكل طفيف (Parallax)
+      const x = (e.clientX / window.innerWidth - 0.5) * 40;
+      const y = (e.clientY / window.innerHeight - 0.5) * 40;
       setMousePos({ x, y });
     };
 
@@ -45,29 +45,25 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen transition-colors duration-500 overflow-x-hidden">
-      {/* Interactive Transparent GIF Background (Light Mode Only) */}
-      {!isDark && (
-        <div 
-          className="fixed inset-0 z-[-1] pointer-events-none opacity-[0.07]"
-          style={{
-            // رابط GIF لخريطة رقمية شفافة
-            backgroundImage: `url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHIzN3R1Zzh6N3R6eGZ5Z2x6Z2x6Z2x6Z2x6Z2x6Z2x6Z2x6Z2wmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/l41lTfux3O9gVz28M/giphy.gif')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            transform: `translate(${mousePos.x}px, ${mousePos.y}px) scale(1.1)`,
-            transition: 'transform 0.2s ease-out',
-            filter: 'contrast(1.2) brightness(1.1)'
-          }}
-        />
-      )}
+      {/* Interactive GIF Background (Transparent Look) */}
+      <div 
+        className={`fixed inset-0 z-[-1] pointer-events-none transition-opacity duration-700 ${isDark ? 'opacity-[0.05]' : 'opacity-[0.1]'}`}
+        style={{
+          // رابط GIF الجديد لخريطة تضاريس متقدمة
+          backgroundImage: `url('https://cdn.dribbble.com/userupload/22074728/file/original-ea0981a284d1e1f2158a304b23e90aeb.gif')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          transform: `translate(${mousePos.x}px, ${mousePos.y}px) scale(1.15)`,
+          transition: 'transform 0.2s ease-out',
+          filter: isDark ? 'invert(1) contrast(1.5) brightness(0.8)' : 'contrast(1.1) brightness(1.1)'
+        }}
+      />
 
-      {/* Subtle Pattern for Dark Mode */}
-      {isDark && (
-        <div className="fixed inset-0 z-[-1] opacity-20 pointer-events-none topo-bg"></div>
-      )}
+      {/* Subtle Pattern for Overlay depth */}
+      <div className="fixed inset-0 z-[-2] topo-bg pointer-events-none opacity-30"></div>
       
-      {/* Additional Global Overlay for softness */}
-      <div className="fixed inset-0 z-[-2] bg-slate-50 dark:bg-slate-950 pointer-events-none"></div>
+      {/* Background Color Base */}
+      <div className="fixed inset-0 z-[-3] bg-slate-50 dark:bg-slate-950 pointer-events-none"></div>
 
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
       
