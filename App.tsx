@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Skills from './components/Skills';
@@ -18,13 +17,12 @@ const App: React.FC = () => {
   });
 
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const bgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       // تحريك خفيف للخلفية (Parallax effect)
-      const x = (e.clientX / window.innerWidth - 0.5) * 20;
-      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      const x = (e.clientX / window.innerWidth - 0.5) * 25;
+      const y = (e.clientY / window.innerHeight - 0.5) * 25;
       setMousePos({ x, y });
     };
 
@@ -45,27 +43,26 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen transition-colors duration-300">
-      {/* Interactive Background GIF (Visible in Light Mode) */}
-      {!isDark && (
-        <div 
-          className="fixed inset-0 z-[-1] pointer-events-none opacity-10"
-          style={{
-            backgroundImage: `url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZkODl4N3R6eGZ5Z2x6Z2x6Z2x6Z2x6Z2x6Z2x6Z2x6Z2wmZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/3o7TKVUn7iM8FMEU24/giphy.gif')`, // خريطة تقنية مجردة
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            transform: `translate(${mousePos.x}px, ${mousePos.y}px) scale(1.05)`,
-            transition: 'transform 0.1s ease-out'
-          }}
-        />
-      )}
+    <div className="relative min-h-screen transition-colors duration-300 overflow-x-hidden">
+      {/* Interactive Transparent GIF Background */}
+      <div 
+        className={`fixed inset-0 z-[-1] pointer-events-none transition-opacity duration-700 ${isDark ? 'opacity-[0.04]' : 'opacity-[0.08]'}`}
+        style={{
+          backgroundImage: `url('https://cdn.dribbble.com/userupload/22074728/file/original-ea0981a284d1e1f2158a304b23e90aeb.gif')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          transform: `translate(${mousePos.x}px, ${mousePos.y}px) scale(1.1)`,
+          transition: 'transform 0.15s ease-out',
+          filter: isDark ? 'invert(1) brightness(0.7)' : 'none'
+        }}
+      />
       
-      {/* Topographic Pattern Overlay */}
-      <div className="fixed inset-0 z-[-2] topo-bg pointer-events-none opacity-50"></div>
+      {/* Background Layer Base */}
+      <div className="fixed inset-0 z-[-2] bg-slate-50 dark:bg-slate-950 pointer-events-none"></div>
 
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />
       
-      <main className="relative overflow-x-hidden">
+      <main className="relative">
         <Hero />
         
         {/* Stats Section */}
