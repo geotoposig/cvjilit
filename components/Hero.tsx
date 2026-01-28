@@ -95,7 +95,7 @@ const Hero: React.FC = () => {
           <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-full blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
           <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-white dark:border-slate-800 shadow-2xl transition-transform group-hover:scale-105 duration-500 bg-white dark:bg-slate-900">
             <img 
-              src="https://jilitelmostafa.github.io/portfolio/assets/img/Jilit-Elmostafa.webp" 
+              src="https://geotoposig.github.io/portfolio/assets/img/Jilit-Elmostafa.webp" 
               alt={PERSONAL_INFO.name}
               className="w-full h-full object-cover"
             />
